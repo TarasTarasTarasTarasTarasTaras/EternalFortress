@@ -6,4 +6,9 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\EternalFortress.Data\EternalFortress.Data.csproj" />
+    <ProjectReference Include="..\EternalFortress.Entities\EternalFortress.Entities.csproj" />
+  </ItemGroup>
+
 </Project>
