@@ -1,4 +1,5 @@
 ﻿using EternalFortress.Business.Services;
+using EternalFortress.Data.Countries;
 using EternalFortress.Data.Users;
 using EternalFortress.Entities.DTOs;
 using Microsoft.Extensions.Configuration;
@@ -13,12 +14,14 @@ namespace EternalFortress.Business.Accounts
         private readonly IJwtService _jwtService;
         private readonly IConfiguration _configuration;
         private readonly IUserRepository _userRepository;
+        private readonly ICountryRepository _countryRepository;
 
-        public AccountFacade(IJwtService jwtService, IConfiguration configuration, IUserRepository userRepository)
+        public AccountFacade(IJwtService jwtService, IConfiguration configuration, IUserRepository userRepository, ICountryRepository countryRepository)
         {
             _jwtService = jwtService;
             _configuration = configuration;
             _userRepository = userRepository;
+            _countryRepository = countryRepository;
         }
 
         public void Register(UserDTO user)
@@ -65,6 +68,19 @@ namespace EternalFortress.Business.Accounts
 
             var token = _jwtService.GenerateToken(claims);
             return token;
+        }
+
+        public bool UserAlreadyExists(string email)
+        {
+            var user = _userRepository.GetUserByEmail(email);
+
+            return user != null;
+        }
+
+        public IEnumerable<CountryDTO> GetCountries()
+        {
+            var countries = _countryRepository.GetAllCountries();
+            return countries;
         }
     }
 }

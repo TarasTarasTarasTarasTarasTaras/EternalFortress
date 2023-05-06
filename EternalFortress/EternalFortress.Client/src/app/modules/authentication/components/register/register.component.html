@@ -1,0 +1,43 @@
+<div class="wrapper">
+  <div class="container block">
+    <h1>Реєстрація</h1>
+
+    <form class="form" [formGroup]="form">
+      <mat-form-field class="full-width" appearance="outline" style="width: 260px;">
+        <mat-label>Email</mat-label>
+        <input matInput formControlName="email">
+        <mat-error class="error" *ngIf="form.controls['email']?.errors?.['emailExists']">Користувач з таким емейлом вже зареєстрований</mat-error>
+      </mat-form-field>
+
+      <mat-form-field class="full-width" appearance="outline" style="width: 260px;">
+        <mat-label>Ім'я</mat-label>
+        <input matInput formControlName="firstName">
+      </mat-form-field>
+
+      <mat-form-field class="full-width" appearance="outline" style="width: 260px;">
+        <mat-label>Прізвище</mat-label>
+        <input matInput formControlName="lastName">
+      </mat-form-field>
+
+      <mat-form-field appearance="outline" style="width: 260px;">
+        <mat-label>Країна</mat-label>
+        <mat-select formControlName="countryId">
+            <mat-option *ngFor="let country of countries;" [value]="country.id">
+                {{ country.name }}
+            </mat-option>
+        </mat-select>
+      </mat-form-field>
+
+      <mat-form-field class="full-width" appearance="outline" style="width: 260px;">
+        <mat-label>Пароль</mat-label>
+        <input matInput formControlName="password" type="password">
+      </mat-form-field>
+
+      <button type="submit" id="login-button" (click)="register()">Зареєструватись</button>
+
+      <div class="info">
+        Вже є акаунт? <div class="link" (click)="routeLogin()">Увійти</div>
+      </div>
+    </form>
+  </div>
+</div>

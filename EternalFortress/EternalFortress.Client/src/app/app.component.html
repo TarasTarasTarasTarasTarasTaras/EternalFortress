@@ -1,1 +1,9 @@
-<h1>EternalFortress</h1>
+<div class="wrapper">
+    <div class="logo"><img src="../../../../../assets/img/logo.png"></div>
+
+    <router-outlet></router-outlet>
+
+    <div class="bg-bubbles">
+        <img *ngFor="let i of [].constructor(20);" src="../../../../../assets/img/file.png">
+    </div>
+</div>

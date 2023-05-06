@@ -7,6 +7,7 @@ using EternalFortress.Data.EF.Context;
 using EternalFortress.Data.Users;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
 
@@ -17,6 +18,17 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddDbContext<EternalFortressContext>(options =>
 {
     options.UseSqlServer(builder.Configuration.GetConnectionString("EternalFortressConnectionDb"));
+});
+
+var allowedOrigins = builder.Configuration.GetSection("AllowCorsFromOrigin").Get<string[]>();
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy(
+      "CorsPolicy",
+      builder => builder.WithOrigins(allowedOrigins)
+      .AllowAnyMethod()
+      .AllowAnyHeader()
+      .AllowCredentials());
 });
 
 #region jwt
@@ -100,6 +112,8 @@ if (app.Environment.IsDevelopment())
     app.UseSwagger();
     app.UseSwaggerUI();
 }
+
+app.UseCors("CorsPolicy");
 
 app.UseHttpsRedirection();
 

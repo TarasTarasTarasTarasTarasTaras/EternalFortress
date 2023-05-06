@@ -38,5 +38,19 @@ namespace EternalFortress.API.Controllers
             var token = _accountFacade.GetToken(model.Email);
             return Ok(new { token = token });
         }
+
+        [HttpGet("email-exists")]
+        public ActionResult GetEmailExists([FromQuery] string email)
+        {
+            var exists = _accountFacade.UserAlreadyExists(email);
+            return Ok(exists);
+        }
+
+        [HttpGet("countries")]
+        public ActionResult GetCountries()
+        {
+            var countries = _accountFacade.GetCountries();
+            return Ok(countries);
+        }
     }
 }

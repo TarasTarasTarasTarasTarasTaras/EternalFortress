@@ -1,0 +1,30 @@
+<div class="wrapper">
+  <div class="container block">
+    <h1>Авторизація</h1>
+
+    <form class="form" [formGroup]="form">
+      <mat-form-field class="full-width" appearance="outline" style="width: 260px;">
+        <mat-label>Email</mat-label>
+        <input matInput formControlName="email">
+      </mat-form-field>
+
+      <mat-form-field class="full-width" appearance="outline" style="width: 260px;">
+        <mat-label>Пароль</mat-label>
+        <input matInput formControlName="password" type="password">
+      </mat-form-field>
+
+      <button type="submit" id="login-button" (click)="login()">Авторизуватись</button>
+
+      <div class="info">
+        Немає акаунту? <div class="link" (click)="routeRegister()">Зареєструватись</div>
+      </div>
+    </form>
+
+    <div style="height: 1px;"></div>
+  </div>
+
+      <div style="height: 1px;"></div>
+
+</div>
+
+<div style="height: 1px;"></div>

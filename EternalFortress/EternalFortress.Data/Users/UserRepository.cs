@@ -27,6 +27,8 @@ namespace EternalFortress.Data.Users
         {
             var user = Context.Users.FirstOrDefault(u => u.Email == email);
 
+            if (user == null) return null;
+
             return _mapper.Map<UserDTO>(user);
         }
 

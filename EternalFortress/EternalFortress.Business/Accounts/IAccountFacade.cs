@@ -9,5 +9,9 @@ namespace EternalFortress.Business.Accounts
         bool Login(string email, string password);
 
         void Register(UserDTO user);
+
+        bool UserAlreadyExists(string email);
+
+        IEnumerable<CountryDTO> GetCountries();
     }
 }
