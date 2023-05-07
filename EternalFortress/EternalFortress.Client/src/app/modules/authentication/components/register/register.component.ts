@@ -37,6 +37,7 @@ export class RegisterComponent implements OnInit {
     this.http.post(environment.apiUrl + 'account/register', model).subscribe(() => {
       this.http.post(environment.apiUrl + 'account/login', model).subscribe((res: any) => {
         this.setLocalStorage(res.token);
+        this.router.navigate(['dashboard']);
       })
     })
   }

@@ -9,6 +9,7 @@ import { MatInputModule } from '@angular/material/input';
 import { MatListModule } from '@angular/material/list';
 import { MatMenuModule } from '@angular/material/menu';
 import { MatSelectModule } from '@angular/material/select';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatTooltipModule } from '@angular/material/tooltip';
 
@@ -25,7 +26,8 @@ import { MatTooltipModule } from '@angular/material/tooltip';
     MatMenuModule,
     MatSelectModule,
     MatToolbarModule,
-    MatTooltipModule
+    MatTooltipModule,
+    MatSnackBarModule
   ],
   imports: [ 
     MatButtonModule,
@@ -39,7 +41,8 @@ import { MatTooltipModule } from '@angular/material/tooltip';
     MatMenuModule,
     MatSelectModule,
     MatToolbarModule,
-    MatTooltipModule
+    MatTooltipModule,
+    MatSnackBarModule
   ]
 })
 export class MaterialModule { }

@@ -1,0 +1,90 @@
+* {
+    box-sizing: border-box;
+}
+
+.main-block {
+    width: 378px;
+    height: auto;
+    padding: 5px;
+    position: relative;
+}
+
+@media screen and (max-width : 995px) {
+    .main-block {
+        width: 60vw;
+    }
+}
+
+.name-block {
+    font-size: 17px;
+    color: #5279b4;
+    margin-bottom: 10px;
+}
+
+.description-block {
+    color: rgb(169, 169, 169);
+    font-size: 13.7px;
+    margin-bottom: 10px;
+}
+
+.block-input-row {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.block-buttons {
+    text-align:right;
+    width:100%;
+    margin-top: 10px;
+}
+
+.button {
+    margin-right: 12px;
+    border-radius: 4px;
+    outline: none;
+    padding: 10px;
+    background-color: white;
+    color: rgb(82, 121, 180);
+    border: 1px solid rgb(82, 121, 180);
+}
+
+.button:last-child {
+    margin-right: 0;
+}
+
+.button:disabled {
+    background-color: white;
+    color: rgb(164, 164, 164);
+    border: 1px solid rgb(236, 236, 236);
+}
+
+.button:hover:not([disabled]) {
+    background-color: rgb(82, 121, 180);
+    color: rgb(254, 254, 254);
+}
+
+.button:active:not([disabled]) {
+    background-color: rgb(69, 108, 167);
+    color: rgb(254, 254, 254);
+}
+
+.input {
+    width: 100%;
+    height: 37px;
+    border: 1px solid rgb(201, 225, 253);
+    padding-left: 10px;
+    border-radius: 5px;
+}
+
+.input:active,
+.input:focus,
+.input:hover {
+    outline: none;
+    border: 1px solid rgb(82, 121, 180);
+}
+
+.exit {
+    position: absolute;
+    right: 10px;
+    top: 10px;
+}

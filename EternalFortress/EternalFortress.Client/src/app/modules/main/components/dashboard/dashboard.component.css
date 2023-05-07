@@ -1,0 +1,118 @@
+.main {
+    padding: 24px 24px;
+    border-radius: 10px;
+    box-shadow: 4px 6px 17px 4px rgba(62, 77, 89, 0.34);
+    background-color: #ffffff6b;;
+    width: 90%;
+    margin: 100px auto;
+    height: 70vh;
+    position: relative;
+    z-index: 999;
+    display: flex;
+}
+
+.sidebar {
+    width: 304px;
+    height: 100%;
+    padding: 20px 25px;
+    background-color: white;
+    border-radius: 10px;
+    box-shadow: 4px 6px 17px 4px rgba(62, 77, 89, 0.34);
+}
+
+.sidebar .button {
+    background-color: white;
+    padding: 20px 30px 20px 30px;
+    color: rgb(64 128 255);
+    border: 1px solid rgb(64 128 255);
+    border-radius: 10px;
+    position: relative;
+    font-weight: bold;
+}
+
+.sidebar .button:hover {
+    color: rgb(26, 87, 210);
+    background-color: rgb(216, 216, 216);
+    border: 1px solid rgb(26, 87, 210);
+}
+
+.sidebar .button:active {
+    border: 2px solid rgb(26, 87, 210);
+}
+
+.block {
+    width: 100%;
+    height: 100%;
+    padding: 20px 25px;
+    background-color: white;
+    border-radius: 10px;
+    margin-left: 20px;
+    box-shadow: 4px 6px 17px 4px rgba(62, 77, 89, 0.34);
+}
+
+.button .icon {
+    width: 34px;
+}
+
+.block h1 {
+    font-size: 30px;
+    color: #707070;
+}
+
+.folders {
+    max-height: 500px;
+    overflow-y: auto;
+    margin-bottom: 20px;
+    padding-right: 7px;
+    margin-right: -10px;
+}
+
+.folder {
+    border: 1px solid gray;
+    margin: 10px 0px;
+    padding: 15px 10px;
+    border-radius: 8px;
+    cursor: pointer;
+    color: #565656bf;
+    font-weight: 500;
+}
+
+.selected {
+    color: white;
+    background-color: rgb(81 139 255);
+}
+
+.top {
+    display: flex;
+    margin-top: 25px;
+}
+
+.content {
+    margin-top: 40px;
+    overflow-y: auto;
+    max-height: 460px;
+    padding-top: 5px;
+}
+
+.files {
+    color: #707070;
+    font-size: 20px;
+    border-radius: 10px;
+    /* border: 1px solid #707070 */
+}
+
+.file {
+    display: flex;
+    margin-bottom: 25px;
+}
+
+.file:last-child {
+    margin-bottom: 0;
+}
+
+.img-file {
+    width: 45px;
+    height: 45px;
+    margin-top: -10px;
+    float: right;
+}

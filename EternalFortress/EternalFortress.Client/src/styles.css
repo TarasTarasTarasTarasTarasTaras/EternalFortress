@@ -48,10 +48,10 @@
 
  .wrapper {
 	 background: #9c50a3;
-	 background: -webkit-linear-gradient(top left,#7050a3 0%,#53e3a6 100%);
-	 background: -moz-linear-gradient(top left,#a35085 0%,#d9e353 100%);
+	 background: -webkit-linear-gradient(top left,#6200ff 0%,#15ff00 100%);
+	 background: -moz-linear-gradient(top left,#ff03a3 0%,#3c00ff 100%);
 	 background: -o-linear-gradient(top left,#6650a3 0%,#9b53e3 100%);
-	 background: linear-gradient(to bottom right,#50a37b 0%,#e3a953 100%);
+	 background: linear-gradient(to bottom right,#91e0ee 0%,#debb5b 100%);
 	 position: absolute;
 	 top: 0;
 	 left: 0;
@@ -212,3 +212,7 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 ::-webkit-scrollbar-thumb {
     background: rgb(216, 216, 216);
 }
+
+.bg-color .mat-dialog-container{
+	background-color: white;
+  }

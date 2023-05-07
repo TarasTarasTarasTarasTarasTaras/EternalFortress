@@ -3,6 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { environment } from 'src/environments/environment';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-login',
@@ -15,16 +16,28 @@ export class LoginComponent implements OnInit {
     password: new FormControl('', Validators.required),
   });
 
-  constructor(private http: HttpClient, private router: Router) { }
+  constructor(private http: HttpClient, private router: Router, private snackBar: MatSnackBar) { }
 
   ngOnInit() {
   }
 
   login() {
+    if (this.form.invalid) {
+      return;
+    }
+    
     var model = this.form.getRawValue();
 
-    this.http.post(environment.apiUrl + 'account/login', model).subscribe((res: any) => {
-      this.setLocalStorage(res.token);
+    this.http.post(environment.apiUrl + 'account/login', model).subscribe({
+      next: (res: any) => {
+        this.setLocalStorage(res.token);
+        this.router.navigate(['dashboard']);
+      },
+      error: () => {
+        this.snackBar.open('Невірний Email/Пароль', 'Закрити', {
+          duration: 5000,
+        });
+      }
     })
   }
 

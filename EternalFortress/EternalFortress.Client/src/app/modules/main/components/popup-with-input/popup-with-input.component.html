@@ -1,0 +1,16 @@
+<div class="main-block" style="background-color: white;">
+  <h1 class="name-block" mat-dialog-title>{{data.title}}</h1>
+
+  <div class="description-block" mat-dialog-content>
+    {{data.message}}
+  </div>
+
+  <input class="input" type="{{data?.inputType ?? ''}}" #inputData placeholder="{{data?.placeholder ?? ''}}" value="{{data?.inputValue ?? ''}}"/>
+
+  <div class="block-input-row">
+    <div class="block-buttons">
+      <button class="button" (click)="cancelPressed()">Скасувати</button>
+      <button class="button" (click)="okPressed(inputData.value)">Зберегти</button>
+    </div>
+  </div>
+</div>
