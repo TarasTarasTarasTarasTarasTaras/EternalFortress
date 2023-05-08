@@ -4,6 +4,7 @@ import { MainRoutingModule } from './main-routing.module';
 import { MaterialModule } from 'src/app/material.module';
 import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { PopupWithInputComponent } from './components/popup-with-input/popup-with-input.component';
+import { AboutComponent } from './components/about/about.component';
 
 @NgModule({
   imports: [
@@ -13,7 +14,8 @@ import { PopupWithInputComponent } from './components/popup-with-input/popup-wit
   ],
   declarations: [
     DashboardComponent,
-    PopupWithInputComponent
+    PopupWithInputComponent,
+    AboutComponent
   ]
 })
 export class MainModule { }

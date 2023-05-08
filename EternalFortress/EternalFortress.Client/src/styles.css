@@ -36,6 +36,7 @@
 .logo {
     z-index: 99999;
     position: relative;
+	display: flex;
     background-color: transparent;
 }
 
