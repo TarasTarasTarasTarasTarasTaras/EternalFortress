@@ -47,8 +47,6 @@ export class LoginComponent implements OnInit {
 
   private setLocalStorage(token) {
     if (!token) return;
-
-    console.log('set token')
     
     localStorage.setItem('access_token', token);
     localStorage.setItem('login-event', 'login' + Math.random());

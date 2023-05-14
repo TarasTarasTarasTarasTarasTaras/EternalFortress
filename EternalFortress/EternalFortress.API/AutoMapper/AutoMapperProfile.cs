@@ -10,8 +10,10 @@ namespace EternalFortress.API.AutoMapper
         public AutoMapperProfile()
         {
             CreateMap<RegisterModel, UserDTO>().ReverseMap();
+            CreateMap<FolderModel, FolderDTO>().ReverseMap();
 
             CreateMap<UserDTO, User>().ReverseMap();
+            CreateMap<FolderDTO, Folder>().ReverseMap();
             CreateMap<CountryDTO, Country>().ReverseMap();
         }
     }

@@ -19,5 +19,9 @@ namespace EternalFortress.Data.EF.Context
         public DbSet<User> Users { get; set; }
 
         public DbSet<Country> Countries { get; set; }
+
+        public DbSet<Folder> Folder { get; set; }
+
+        public DbSet<Entities.FileInfo> FileInfo { get; set; }
     }
 }

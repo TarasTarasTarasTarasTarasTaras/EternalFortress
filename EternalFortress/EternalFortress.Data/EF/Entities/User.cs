@@ -16,5 +16,9 @@
         public int CountryId { get; set; }
 
         public Country? Country { get; set; }
+
+        public IEnumerable<Folder>? Folders { get; set; }
+
+        public IEnumerable<FileInfo>? Files { get; set; }
     }
 }

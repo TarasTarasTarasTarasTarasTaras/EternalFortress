@@ -2,9 +2,11 @@ using Amazon.S3;
 using AutoMapper;
 using EternalFortress.API.AutoMapper;
 using EternalFortress.Business.Accounts;
+using EternalFortress.Business.Folders;
 using EternalFortress.Business.Services;
 using EternalFortress.Data.Countries;
 using EternalFortress.Data.EF.Context;
+using EternalFortress.Data.Folders;
 using EternalFortress.Data.Users;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
@@ -83,8 +85,10 @@ builder.Services.AddAuthentication(options =>
 builder.Services.AddScoped<IJwtService, JwtService>();
 
 builder.Services.AddScoped<IUserRepository, UserRepository>();
+builder.Services.AddScoped<IFolderRepository, FolderRepository>();
 builder.Services.AddScoped<ICountryRepository, CountryRepository>();
 
+builder.Services.AddScoped<IFolderFacade, FolderFacade>();
 builder.Services.AddScoped<IAccountFacade, AccountFacade>();
 
 
