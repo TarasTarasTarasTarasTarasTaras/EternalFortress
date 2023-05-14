@@ -1,0 +1,11 @@
+version: '3.4'
+
+services:
+  eternalfortress.api:
+    image: ${DOCKER_REGISTRY-}eternalfortressapi
+    build:
+      context: .
+      dockerfile: EternalFortress.API/Dockerfile
+    volumes:
+    - $HOME/.aws/credentials:/home/app/.aws/credentials:ro
+    - ~/.aws/:/root/.aws:ro

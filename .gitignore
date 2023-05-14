@@ -1,6 +1,8 @@
 *.user
 *.DotSettings
 EternalFortress/.vs/
+EternalFortress/obj/
+EternalFortress/bin/
 EternalFortress/EternalFortress.API/obj/
 EternalFortress/EternalFortress.API/bin/
 EternalFortress/EternalFortress.Business/obj/

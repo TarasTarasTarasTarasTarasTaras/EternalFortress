@@ -3,13 +3,15 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.4.33213.308
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EternalFortress.API", "EternalFortress.API\EternalFortress.API.csproj", "{3BD4FF29-24FF-465C-A1D2-64F67FDD4742}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EternalFortress.API", "EternalFortress.API\EternalFortress.API.csproj", "{3BD4FF29-24FF-465C-A1D2-64F67FDD4742}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EternalFortress.Data", "EternalFortress.Data\EternalFortress.Data.csproj", "{DA8E4FE1-327B-4800-BFE6-E52E59A80706}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EternalFortress.Data", "EternalFortress.Data\EternalFortress.Data.csproj", "{DA8E4FE1-327B-4800-BFE6-E52E59A80706}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EternalFortress.Business", "EternalFortress.Business\EternalFortress.Business.csproj", "{3AAA4165-6A75-465B-9D20-84BE90D24C31}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EternalFortress.Business", "EternalFortress.Business\EternalFortress.Business.csproj", "{3AAA4165-6A75-465B-9D20-84BE90D24C31}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EternalFortress.Entities", "EternalFortress.Entities\EternalFortress.Entities.csproj", "{C20C4762-305F-4EA2-B116-B2B5A7620C6D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EternalFortress.Entities", "EternalFortress.Entities\EternalFortress.Entities.csproj", "{C20C4762-305F-4EA2-B116-B2B5A7620C6D}"
+EndProject
+Project("{E53339B2-1760-4266-BCC7-CA923CBCF16C}") = "docker-compose", "docker-compose.dcproj", "{152D661E-2ED6-480C-83EF-3096453BCD64}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -33,6 +35,10 @@ Global
 		{C20C4762-305F-4EA2-B116-B2B5A7620C6D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C20C4762-305F-4EA2-B116-B2B5A7620C6D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{C20C4762-305F-4EA2-B116-B2B5A7620C6D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{152D661E-2ED6-480C-83EF-3096453BCD64}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{152D661E-2ED6-480C-83EF-3096453BCD64}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{152D661E-2ED6-480C-83EF-3096453BCD64}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{152D661E-2ED6-480C-83EF-3096453BCD64}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

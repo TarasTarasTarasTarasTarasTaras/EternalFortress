@@ -1,3 +1,4 @@
+using Amazon.S3;
 using AutoMapper;
 using EternalFortress.API.AutoMapper;
 using EternalFortress.Business.Accounts;
@@ -86,6 +87,9 @@ builder.Services.AddScoped<ICountryRepository, CountryRepository>();
 
 builder.Services.AddScoped<IAccountFacade, AccountFacade>();
 
+
+builder.Services.AddDefaultAWSOptions(builder.Configuration.GetAWSOptions());
+builder.Services.AddAWSService<IAmazonS3>();
 
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle

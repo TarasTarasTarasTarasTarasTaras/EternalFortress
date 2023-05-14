@@ -7,6 +7,11 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="AWSSDK.Extensions.NETCore.Setup" Version="3.7.7" />
+    <PackageReference Include="AWSSDK.S3" Version="3.7.104.14" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\EternalFortress.Data\EternalFortress.Data.csproj" />
     <ProjectReference Include="..\EternalFortress.Entities\EternalFortress.Entities.csproj" />
   </ItemGroup>
