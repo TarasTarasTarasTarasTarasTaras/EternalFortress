@@ -32,5 +32,17 @@ namespace EternalFortress.Data.Folders
             Context.Folder.Add(entity);
             Context.SaveChanges();
         }
+
+        public decimal GetTotalFileSizeInFolder(int folderId)
+        {
+            var totalFileSize = Context
+                .FileInfo
+                .Where(f => f.FolderId == folderId)
+                .Sum(f => f.Size);
+
+            if (totalFileSize == null) return 0;
+
+            return totalFileSize.Value;
+        }
     }
 }

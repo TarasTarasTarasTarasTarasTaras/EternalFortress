@@ -22,6 +22,11 @@ namespace EternalFortress.Business.Folders
         public IEnumerable<FolderDTO> GetUserFolders(int userId)
         {
             var folders = _folderRepository.GetUserFolders(userId);
+
+            folders
+                .ToList()
+                .ForEach(f => f.TotalFileSize = _folderRepository.GetTotalFileSizeInFolder(f.Id));
+
             return folders;
         }
 

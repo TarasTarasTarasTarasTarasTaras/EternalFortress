@@ -1,9 +1,10 @@
 <div class="main">
   <div class="sidebar">
     <div class="folders">
-      <div class="folder">
-        <div>Google Drive</div>
-        <div>3GB/5GB</div>
+      <h2>Мої папки</h2>
+      <div class="folder" *ngFor="let folder of folders" (click)="selectFolder(folder.id)" [ngClass]="{'selected': selectedFolder == folder.id}">
+        <div>{{ folder.name }}</div>
+        <div>{{ folder.totalFileSize }}/5GB</div>
       </div>
     </div>
 
@@ -26,102 +27,6 @@
       </div>
 
       <div class="content">
-        <div class="file">
-          <div style="width: 5%;"><img class="img-file" src="../../../../../assets/img/file.png"></div>
-          <div style="width: 60%;">file.png</div>
-
-          <div style="width: 20%;">20.12.2022</div>
-          <div style="width: 15%;">1MB</div>
-        </div>
-
-        <div class="file">
-          <div style="width: 5%;"><img class="img-file" src="../../../../../assets/img/file.png"></div>
-          <div style="width: 60%;">file.png</div>
-
-          <div style="width: 20%;">20.12.2022</div>
-          <div style="width: 15%;">1MB</div>
-        </div>
-
-        <div class="file">
-          <div style="width: 5%;"><img class="img-file" src="../../../../../assets/img/file.png"></div>
-          <div style="width: 60%;">file.png</div>
-
-          <div style="width: 20%;">20.12.2022</div>
-          <div style="width: 15%;">1MB</div>
-        </div>
-
-        <div class="file">
-          <div style="width: 5%;"><img class="img-file" src="../../../../../assets/img/file.png"></div>
-          <div style="width: 60%;">file.png</div>
-
-          <div style="width: 20%;">20.12.2022</div>
-          <div style="width: 15%;">1MB</div>
-        </div>
-
-        <div class="file">
-          <div style="width: 5%;"><img class="img-file" src="../../../../../assets/img/file.png"></div>
-          <div style="width: 60%;">file.png</div>
-
-          <div style="width: 20%;">20.12.2022</div>
-          <div style="width: 15%;">1MB</div>
-        </div>
-
-        <div class="file">
-          <div style="width: 5%;"><img class="img-file" src="../../../../../assets/img/file.png"></div>
-          <div style="width: 60%;">file.png</div>
-
-          <div style="width: 20%;">20.12.2022</div>
-          <div style="width: 15%;">1MB</div>
-        </div>
-
-        <div class="file">
-          <div style="width: 5%;"><img class="img-file" src="../../../../../assets/img/file.png"></div>
-          <div style="width: 60%;">file.png</div>
-
-          <div style="width: 20%;">20.12.2022</div>
-          <div style="width: 15%;">1MB</div>
-        </div>
-
-        <div class="file">
-          <div style="width: 5%;"><img class="img-file" src="../../../../../assets/img/file.png"></div>
-          <div style="width: 60%;">file.png</div>
-
-          <div style="width: 20%;">20.12.2022</div>
-          <div style="width: 15%;">1MB</div>
-        </div>
-
-        <div class="file">
-          <div style="width: 5%;"><img class="img-file" src="../../../../../assets/img/file.png"></div>
-          <div style="width: 60%;">file.png</div>
-
-          <div style="width: 20%;">20.12.2022</div>
-          <div style="width: 15%;">1MB</div>
-        </div>
-
-        <div class="file">
-          <div style="width: 5%;"><img class="img-file" src="../../../../../assets/img/file.png"></div>
-          <div style="width: 60%;">file.png</div>
-
-          <div style="width: 20%;">20.12.2022</div>
-          <div style="width: 15%;">1MB</div>
-        </div>
-
-        <div class="file">
-          <div style="width: 5%;"><img class="img-file" src="../../../../../assets/img/file.png"></div>
-          <div style="width: 60%;">file.png</div>
-
-          <div style="width: 20%;">20.12.2022</div>
-          <div style="width: 15%;">1MB</div>
-        </div>
-
-        <div class="file">
-          <div style="width: 5%;"><img class="img-file" src="../../../../../assets/img/file.png"></div>
-          <div style="width: 60%;">file.png</div>
-
-          <div style="width: 20%;">20.12.2022</div>
-          <div style="width: 15%;">1MB</div>
-        </div>
-
         <div class="file">
           <div style="width: 5%;"><img class="img-file" src="../../../../../assets/img/file.png"></div>
           <div style="width: 60%;">file.png</div>

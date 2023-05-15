@@ -4,6 +4,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { PopupWithInputComponent } from '../popup-with-input/popup-with-input.component';
 import { environment } from 'src/environments/environment';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-dashboard',
@@ -11,10 +12,17 @@ import { environment } from 'src/environments/environment';
   styleUrls: ['./dashboard.component.css']
 })
 export class DashboardComponent implements OnInit {
+  folders = [];
+  selectedFolder: number;
 
-  constructor(public dialog: MatDialog, private snackBar: MatSnackBar, private http: HttpClient) { }
+  constructor(
+    private router: Router,
+    public dialog: MatDialog,
+    private snackBar: MatSnackBar,
+    private http: HttpClient) { }
 
   ngOnInit() {
+    this.getFolders();
   }
 
   createFolder() {
@@ -28,7 +36,10 @@ export class DashboardComponent implements OnInit {
       next: res => {
         const model = { name: res.inputValue };
         this.http.post(environment.apiUrl + 'dashboard/create-folder', model).subscribe(() => {
-          console.log('folder created')
+          this.getFolders();
+          this.snackBar.open('Папку створено успішно', 'Закрити', {
+            duration: 5000,
+          });
         })
       },
       error: () => {
@@ -37,5 +48,18 @@ export class DashboardComponent implements OnInit {
         });
       }
     })
+  }
+
+  getFolders() {
+    this.http.get(environment.apiUrl + 'dashboard/get-user-folders').subscribe((folders: any) => {
+      this.folders = folders;
+      this.selectedFolder = this.selectedFolder ?? folders[0].id;
+    });
+  }
+
+  selectFolder(folderId) {
+    this.selectedFolder = folderId;
+    const queryParams = { folderId: folderId };
+    this.router.navigate([], { queryParams: queryParams });
   }
 }

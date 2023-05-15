@@ -8,6 +8,6 @@
 
         public string? Name { get; set; }
 
-        public IEnumerable<FileInfo>? Files { get; set; }
+        public decimal TotalFileSize { get; set; }
     }
 }
