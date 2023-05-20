@@ -6,7 +6,7 @@ namespace EternalFortress.Data.Folders
     {
         void CreateFolder(FolderDTO folder);
         IEnumerable<FolderDTO> GetUserFolders(int userId);
-
         decimal GetTotalFileSizeInFolder(int folderId);
+        string GetFolderName(int folderId);
     }
 }

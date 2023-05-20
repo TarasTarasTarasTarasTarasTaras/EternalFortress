@@ -9,6 +9,7 @@ namespace EternalFortress.API.AutoMapper
     {
         public AutoMapperProfile()
         {
+            CreateMap<ChunkModel, ChunkDTO>().ReverseMap();
             CreateMap<RegisterModel, UserDTO>().ReverseMap();
             CreateMap<FolderModel, FolderDTO>().ReverseMap();
             CreateMap<FileInfoModel, FileInfoDTO>().ReverseMap();

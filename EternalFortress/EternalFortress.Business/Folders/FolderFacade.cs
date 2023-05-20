@@ -46,5 +46,11 @@ namespace EternalFortress.Business.Folders
 
             _folderRepository.CreateFolder(folder);
         }
+
+        public string GetFolderName(int folderId)
+        {
+            var name = _folderRepository.GetFolderName(folderId);
+            return name;
+        }
     }
 }

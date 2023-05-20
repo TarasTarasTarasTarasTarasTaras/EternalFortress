@@ -44,5 +44,15 @@ namespace EternalFortress.Data.Folders
 
             return totalFileSize.Value;
         }
+
+        public string GetFolderName(int folderId)
+        {
+            var name = Context
+                .Folder
+                .FirstOrDefault(f => f.Id == folderId)
+                ?.Name;
+
+            return name;
+        }
     }
 }

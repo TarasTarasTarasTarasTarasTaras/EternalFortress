@@ -1,10 +1,11 @@
-import { NgModule } from '@angular/core';
+import { CUSTOM_ELEMENTS_SCHEMA, NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { MainRoutingModule } from './main-routing.module';
 import { MaterialModule } from 'src/app/material.module';
 import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { PopupWithInputComponent } from './components/popup-with-input/popup-with-input.component';
 import { AboutComponent } from './components/about/about.component';
+import { FileUploadComponent } from './components/file-upload/file-upload.component';
 
 @NgModule({
   imports: [
@@ -15,7 +16,11 @@ import { AboutComponent } from './components/about/about.component';
   declarations: [
     DashboardComponent,
     PopupWithInputComponent,
-    AboutComponent
+    AboutComponent,
+    FileUploadComponent
+  ],
+  schemas: [ 
+    CUSTOM_ELEMENTS_SCHEMA
   ]
 })
 export class MainModule { }

@@ -1,10 +1,11 @@
 import { HttpClient } from '@angular/common/http';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { PopupWithInputComponent } from '../popup-with-input/popup-with-input.component';
 import { environment } from 'src/environments/environment';
 import { Router } from '@angular/router';
+import { FileUploadComponent } from '../file-upload/file-upload.component';
 
 @Component({
   selector: 'app-dashboard',
@@ -14,6 +15,9 @@ import { Router } from '@angular/router';
 export class DashboardComponent implements OnInit {
   folders = [];
   selectedFolder: number;
+  selectedFiles = [];
+
+  @ViewChild('fileUpload') fileUploadComponent: FileUploadComponent;
 
   constructor(
     private router: Router,
@@ -53,13 +57,25 @@ export class DashboardComponent implements OnInit {
   getFolders() {
     this.http.get(environment.apiUrl + 'dashboard/get-user-folders').subscribe((folders: any) => {
       this.folders = folders;
+      // this.folders = [];
       this.selectedFolder = this.selectedFolder ?? folders[0].id;
     });
   }
 
+  getSelectedFolderName(): string {
+    return this.folders.find(f => f.id == this.selectedFolder).name;
+  }
+
   selectFolder(folderId) {
     this.selectedFolder = folderId;
+    this.selectedFiles = this.folders.find(f => f.id == folderId).files;
+
     const queryParams = { folderId: folderId };
     this.router.navigate([], { queryParams: queryParams });
+  }
+
+  onFileUploadClick() {
+    if (this.fileUploadComponent)
+      this.fileUploadComponent.openFileDialog();
   }
 }

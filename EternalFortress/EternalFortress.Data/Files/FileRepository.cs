@@ -23,5 +23,15 @@ namespace EternalFortress.Data.Files
 
             return _mapper.Map<IEnumerable<FileInfoDTO>>(files);
         }
+
+        public int SaveFileInfo(FileInfoDTO file)
+        {
+            var entity = _mapper.Map<EF.Entities.FileInfo>(file);
+
+            Context.FileInfo.Add(entity);
+            Context.SaveChanges();
+
+            return entity.Id;
+        }
     }
 }

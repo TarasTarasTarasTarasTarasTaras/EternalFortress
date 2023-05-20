@@ -2,9 +2,11 @@
   <div class="sidebar">
     <div class="folders">
       <h2>Мої папки</h2>
-      <div class="folder" *ngFor="let folder of folders" (click)="selectFolder(folder.id)" [ngClass]="{'selected': selectedFolder == folder.id}">
-        <div>{{ folder.name }}</div>
-        <div>{{ folder.totalFileSize }}/5GB</div>
+      <div *ngIf="folders?.length else folders_empty">
+        <div class="folder" *ngFor="let folder of folders" (click)="selectFolder(folder.id)" [ngClass]="{'selected': selectedFolder == folder.id}">
+          <div>{{ folder.name }}</div>
+          <div>{{ folder.totalFileSize }}/5GB</div>
+        </div>
       </div>
     </div>
 
@@ -17,8 +19,16 @@
   <div class="block">
     <h1>Мої файли</h1>
 
-    <div class="files">
-      <div class="top">
+    <div class="info description" *ngIf="!selectedFolder || !folders.length">
+      Виберіть зліва папку, в якій хочете переглянути, завантажити, видалити або зберегти файл.
+    </div>
+
+    <div class="files" *ngIf="selectedFolder && folders.length">
+      <div class="top" *ngIf="!selectedFiles?.length">
+        У цій папці поки що немає файлів. Натисніть кнопку "Завантажити", щоб зберегти файл до папки "{{ getSelectedFolderName() }}".
+      </div>
+
+      <div class="top" *ngIf="selectedFiles?.length">
         <div style="width: 5%;"></div>
         <div style="width: 60%;">Назва</div>
 
@@ -36,5 +46,17 @@
         </div>
       </div>
     </div>
+
+    <button class="upload-btn" *ngIf="selectedFolder && folders.length" (click)="onFileUploadClick()">
+      Завантажити
+    </button>
+
+    <app-file-upload #fileUpload [folderId]="selectedFolder"></app-file-upload>
   </div>
 </div>
+
+<ng-template #folders_empty>
+  <div class="info">
+    У вас ще немає створених папок. Створіть свою першу папку, щоб ви могли безпечно зберігати файли.
+  </div>
+</ng-template>
