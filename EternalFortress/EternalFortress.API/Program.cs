@@ -2,6 +2,7 @@ using Amazon.S3;
 using AutoMapper;
 using EternalFortress.API.AutoMapper;
 using EternalFortress.Business.Accounts;
+using EternalFortress.Business.Encryption;
 using EternalFortress.Business.Files;
 using EternalFortress.Business.Folders;
 using EternalFortress.Business.Services;
@@ -10,8 +11,10 @@ using EternalFortress.Data.EF.Context;
 using EternalFortress.Data.Files;
 using EternalFortress.Data.Folders;
 using EternalFortress.Data.Users;
+using EternalFortress.Entities.Options;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
 
@@ -82,8 +85,14 @@ builder.Services.AddAuthentication(options =>
 
 #endregion
 
+var encryptionOptionsSection = builder.Configuration.GetSection(EncryptionOptions.Encryption);
+builder.Services.Configure<EncryptionOptions>(encryptionOptionsSection);
+var encryptionOptions = new EncryptionOptions();
+encryptionOptionsSection.Bind(encryptionOptions);
+builder.Services.AddSingleton(encryptionOptions);
 
 builder.Services.AddScoped<IJwtService, JwtService>();
+builder.Services.AddScoped<IEncryptionService, SystemEncryptionService>();
 
 builder.Services.AddScoped<IUserRepository, UserRepository>();
 builder.Services.AddScoped<IFileRepository, FileRepository>();
