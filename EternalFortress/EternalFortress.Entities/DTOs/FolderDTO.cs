@@ -10,6 +10,6 @@
 
         public decimal TotalFileSize { get; set; }
 
-        public IEnumerable<FileInfo>? Files { get; set; }
+        public IEnumerable<FileInfoDTO>? Files { get; set; }
     }
 }

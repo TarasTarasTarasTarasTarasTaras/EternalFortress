@@ -96,7 +96,7 @@ h2 {
     margin-top: 40px;
     overflow-y: auto;
     max-height: 400px;
-    padding-top: 5px;
+    padding-top: 10px;
 }
 
 .files {
@@ -104,11 +104,13 @@ h2 {
     font-size: 20px;
     border-radius: 10px;
     height: 480px;
+    margin-bottom: 15px;
 }
 
 .file {
     display: flex;
-    margin-bottom: 25px;
+    margin-bottom: 35px;
+    position: relative;
 }
 
 .file:last-child {
@@ -131,8 +133,9 @@ h2 {
     font-size: 20px;
 }
 
-.upload-btn {
-    float: right;
+.btn {
+    display: block;
+    margin: 0 auto;
     appearance: none;
     outline: 0;
     background-color: #6abb74;
@@ -146,6 +149,29 @@ h2 {
     transition-duration: 0.25s;
 }
 
-.upload-btn:hover {
+.btn:hover {
     background-color: #4a8851;
+}
+
+.btn-download {
+    position: absolute;
+    width: 120px;
+    height: 36px;
+    right: 220px;
+    font-size: 14px;
+    top: -7px;
+}
+
+.btn-delete {
+    position: absolute;
+    width: 120px;
+    height: 36px;
+    right: 60px;
+    font-size: 14px;
+    top: -7px;
+    background-color: #ea6464;
+}
+
+.btn-delete:hover {
+    background-color: #b75858;
 }

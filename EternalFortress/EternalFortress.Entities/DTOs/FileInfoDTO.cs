@@ -12,10 +12,6 @@
 
         public int FolderId { get; set; }
 
-        public FolderDTO? Folder { get; set; }
-
         public int UserId { get; set; }
-        
-        public UserDTO? User { get; set; }
     }
 }

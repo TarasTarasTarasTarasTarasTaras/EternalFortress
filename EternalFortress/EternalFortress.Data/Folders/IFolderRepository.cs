@@ -8,5 +8,6 @@ namespace EternalFortress.Data.Folders
         IEnumerable<FolderDTO> GetUserFolders(int userId);
         decimal GetTotalFileSizeInFolder(int folderId);
         string GetFolderName(int folderId);
+        string GetFolderNameByFileId(int fileId);
     }
 }

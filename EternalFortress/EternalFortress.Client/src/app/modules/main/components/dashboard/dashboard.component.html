@@ -5,7 +5,7 @@
       <div *ngIf="folders?.length else folders_empty">
         <div class="folder" *ngFor="let folder of folders" (click)="selectFolder(folder.id)" [ngClass]="{'selected': selectedFolder == folder.id}">
           <div>{{ folder.name }}</div>
-          <div>{{ folder.totalFileSize }}/5GB</div>
+          <div>{{ kbToMb(folder.totalFileSize) }} MB</div>
         </div>
       </div>
     </div>
@@ -30,28 +30,32 @@
 
       <div class="top" *ngIf="selectedFiles?.length">
         <div style="width: 5%;"></div>
-        <div style="width: 60%;">Назва</div>
+        <div style="width: 40%;">Назва</div>
 
         <div style="width: 20%;">Дата додавання</div>
         <div style="width: 15%;">Розмір</div>
       </div>
 
       <div class="content">
-        <div class="file">
+        <div class="file" *ngFor="let file of selectedFiles">
           <div style="width: 5%;"><img class="img-file" src="../../../../../assets/img/file.png"></div>
-          <div style="width: 60%;">file.png</div>
+          <div style="width: 40%;">{{ file.name }}</div>
 
-          <div style="width: 20%;">20.12.2022</div>
-          <div style="width: 15%;">1MB</div>
+          <div style="width: 20%;">{{ file.uploadDate | date:'yyyy-MM-dd HH:mm:ss' }}</div>
+          <div style="width: 15%;">{{ kbToMb(file.size) }}MB</div>
+          <button class="btn btn-download" (click)="onFileDownloadClick(file)">Скачати</button>
+          <button class="btn btn-delete">Видалити</button>
+
+          <app-file-download #fileDownload [folderId]="selectedFolder" [file]="file"></app-file-download>
         </div>
       </div>
     </div>
 
-    <button class="upload-btn" *ngIf="selectedFolder && folders.length" (click)="onFileUploadClick()">
+    <button class="btn" *ngIf="selectedFolder && folders.length" (click)="onFileUploadClick()">
       Завантажити
     </button>
 
-    <app-file-upload #fileUpload [folderId]="selectedFolder"></app-file-upload>
+    <app-file-upload #fileUpload (uploaded)="getFolders()" [folderId]="selectedFolder"></app-file-upload>
   </div>
 </div>
 

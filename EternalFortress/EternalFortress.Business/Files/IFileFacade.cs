@@ -7,5 +7,6 @@ namespace EternalFortress.Business.Files
         IEnumerable<FileInfoDTO> GetUserFiles(int userId, int folderId);
         int SaveFileInfo(FileInfoDTO fileInfo);
         Task UploadChunkToS3(int userId, ChunkDTO dto);
+        Task<string> DownloadChunkFromS3(int userId, int fileId, int index);
     }
 }

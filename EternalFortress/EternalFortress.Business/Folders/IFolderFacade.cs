@@ -7,5 +7,6 @@ namespace EternalFortress.Business.Folders
         Task CreateFolder(int userId, FolderDTO folder);
         IEnumerable<FolderDTO> GetUserFolders(int userId);
         string GetFolderName(int folderId);
+        string GetFolderNameByFileId(int fileId);
     }
 }

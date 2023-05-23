@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { finalize, forkJoin, from, map, Observable, of, switchMap, tap, throwError } from 'rxjs';
+import { forkJoin, map, Observable, tap } from 'rxjs';
 import { environment } from 'src/environments/environment';
 
 const baseUrl = `${environment.apiUrl}dashboard`;
@@ -10,7 +10,7 @@ const baseUrl = `${environment.apiUrl}dashboard`;
 })
 
 export class FileService {
-  private chunkSize = 1000000; // 1 Mb
+  private chunkSize = 1000000;
 
   constructor(
     private http: HttpClient) { }
@@ -52,14 +52,34 @@ export class FileService {
   private getChunkCount(fileSize: number) {
     return Math.floor(fileSize / this.chunkSize) + (fileSize % this.chunkSize > 0 ? 1 : 0);
   }
+  
+  downloadFile(id: number, size: number, updateProgress: Function) {
+    let chunkCount = this.getChunkCount(size);
+    let chunks$: Observable<any>[] = [];
+
+    for (let i = 1; i <= chunkCount; i++) {
+      let chunk$ = this.downloadChunk(id, i).pipe(
+        map((res: any) => {
+          return res.chunk;
+        }),
+        tap(() => {
+          updateProgress(1 / chunkCount);
+        }));
+
+      chunks$.push(chunk$);
+    }
+
+    return forkJoin(chunks$).pipe(map((blob) => {
+      return new Blob(blob, { type: 'application/octect-binary' });
+    }));
+  }
 
   private downloadChunk(id: number, index: number) {
     return this.http.get(`${baseUrl}/get-chunk`, {
       params: {
-        dataDetailId: id,
+        fileId: id,
         index: index
       }
     });
   }
 }
-

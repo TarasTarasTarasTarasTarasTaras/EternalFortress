@@ -6,6 +6,7 @@ import { PopupWithInputComponent } from '../popup-with-input/popup-with-input.co
 import { environment } from 'src/environments/environment';
 import { Router } from '@angular/router';
 import { FileUploadComponent } from '../file-upload/file-upload.component';
+import { FileDownloadComponent } from '../file-download/file-download.component';
 
 @Component({
   selector: 'app-dashboard',
@@ -18,6 +19,7 @@ export class DashboardComponent implements OnInit {
   selectedFiles = [];
 
   @ViewChild('fileUpload') fileUploadComponent: FileUploadComponent;
+  @ViewChild('fileDownload') fileDownloadComponent: FileDownloadComponent;
 
   constructor(
     private router: Router,
@@ -57,8 +59,8 @@ export class DashboardComponent implements OnInit {
   getFolders() {
     this.http.get(environment.apiUrl + 'dashboard/get-user-folders').subscribe((folders: any) => {
       this.folders = folders;
-      // this.folders = [];
       this.selectedFolder = this.selectedFolder ?? folders[0].id;
+      this.selectedFiles = this.folders.find(f => f.id == this.selectedFolder).files;
     });
   }
 
@@ -78,4 +80,13 @@ export class DashboardComponent implements OnInit {
     if (this.fileUploadComponent)
       this.fileUploadComponent.openFileDialog();
   }
+
+  onFileDownloadClick(file) {
+    if (this.fileDownloadComponent)
+      this.fileDownloadComponent.download(file)
+  }
+
+  kbToMb(kb: number): string {
+    return (kb / 1000000).toFixed(2);
+  };  
 }

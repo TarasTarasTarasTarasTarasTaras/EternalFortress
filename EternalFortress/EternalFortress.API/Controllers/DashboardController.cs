@@ -57,5 +57,12 @@ namespace EternalFortress.API.Controllers
             
             return Ok();
         }
+
+        [HttpGet("get-chunk")]
+        public async Task<ActionResult> GetChunk(int fileId, int index)
+        {
+            var content = await _fileFacade.DownloadChunkFromS3(User.GetId(), fileId, index);
+            return Ok(new { Chunk = content });
+        }
     }
 }

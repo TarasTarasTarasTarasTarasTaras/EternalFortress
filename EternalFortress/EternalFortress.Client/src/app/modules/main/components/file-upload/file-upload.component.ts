@@ -1,4 +1,4 @@
-import { Component, ElementRef, Input, OnInit, ViewChild } from '@angular/core';
+import { Component, ElementRef, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { Subscription } from 'rxjs';
 import { FileService } from '../../services/file.service';
@@ -11,6 +11,7 @@ import { FileService } from '../../services/file.service';
 export class FileUploadComponent implements OnInit {
   @ViewChild('fileUpload') fileUpload!: ElementRef;;
   @Input() folderId: number;
+  @Output() uploaded = new EventEmitter();
 
   fileName = '';
   uploadProgress: number = 0;
@@ -51,7 +52,7 @@ export class FileUploadComponent implements OnInit {
   
         this.fileUpload$ = this.fileService.uploadFile(file, fileId, this.folderId, uploadProgress).subscribe({
           next: () => {  
-  
+            this.uploaded.emit();
           },
           error: () => {
               // show alert

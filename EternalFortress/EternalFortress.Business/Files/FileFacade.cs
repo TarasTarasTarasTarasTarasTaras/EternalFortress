@@ -1,4 +1,5 @@
 ﻿using Amazon.S3;
+using Amazon.S3.Model;
 using Amazon.S3.Transfer;
 using EternalFortress.Business.Encryption;
 using EternalFortress.Business.Folders;
@@ -61,13 +62,35 @@ namespace EternalFortress.Business.Files
                 {
                     InputStream = new MemoryStream(encryptedData),
                     Key = path,
-                    BucketName = $"{_configuration["AWSBucketName"]}",
+                    BucketName = _configuration["AWSBucketName"],
                     ContentType = dto.Chunk.ContentType
                 };
 
                 var fileTransferUtility = new TransferUtility(_s3Client);
 
                 await fileTransferUtility.UploadAsync(uploadRequest);
+            }
+        }
+
+        public async Task<string> DownloadChunkFromS3(int userId, int fileId, int index)
+        {
+            var folderName = _folderFacade.GetFolderNameByFileId(fileId);
+            var chunkName = $"{index:0000000000}.chunk";
+
+            var path = $"{userId}/{folderName}/{fileId}/{chunkName}";
+
+            var request = new GetObjectRequest
+            {
+                BucketName = _configuration["AWSBucketName"],
+                Key = path
+            };
+
+            using (var response = await _s3Client.GetObjectAsync(request))
+            {
+                var res = ConvertStreamToByteArray(response.ResponseStream);
+                var decryptedData = _encryptionService.Decrypt(res);
+
+                return decryptedData;
             }
         }
 
@@ -81,11 +104,13 @@ namespace EternalFortress.Business.Files
             }
         }
 
-        private MemoryStream StringToMemoryStream(string inputString)
+        public byte[] ConvertStreamToByteArray(Stream stream)
         {
-            byte[] bytes = Encoding.UTF8.GetBytes(inputString);
-
-            return new MemoryStream(bytes);
+            using (MemoryStream memoryStream = new MemoryStream())
+            {
+                stream.CopyTo(memoryStream);
+                return memoryStream.ToArray();
+            }
         }
     }
 }

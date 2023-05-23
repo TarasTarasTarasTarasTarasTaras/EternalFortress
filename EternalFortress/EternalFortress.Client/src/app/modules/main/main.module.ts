@@ -6,6 +6,7 @@ import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { PopupWithInputComponent } from './components/popup-with-input/popup-with-input.component';
 import { AboutComponent } from './components/about/about.component';
 import { FileUploadComponent } from './components/file-upload/file-upload.component';
+import { FileDownloadComponent } from './components/file-download/file-download.component';
 
 @NgModule({
   imports: [
@@ -17,7 +18,8 @@ import { FileUploadComponent } from './components/file-upload/file-upload.compon
     DashboardComponent,
     PopupWithInputComponent,
     AboutComponent,
-    FileUploadComponent
+    FileUploadComponent,
+    FileDownloadComponent
   ],
   schemas: [ 
     CUSTOM_ELEMENTS_SCHEMA

@@ -52,5 +52,11 @@ namespace EternalFortress.Business.Folders
             var name = _folderRepository.GetFolderName(folderId);
             return name;
         }
+
+        public string GetFolderNameByFileId(int fileId)
+        {
+            var name = _folderRepository.GetFolderNameByFileId(fileId);
+            return name;
+        }
     }
 }

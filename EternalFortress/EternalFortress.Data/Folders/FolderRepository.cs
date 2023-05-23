@@ -2,6 +2,7 @@
 using EternalFortress.Data.EF.Context;
 using EternalFortress.Data.EF.Entities;
 using EternalFortress.Entities.DTOs;
+using Microsoft.EntityFrameworkCore;
 
 namespace EternalFortress.Data.Folders
 {
@@ -20,6 +21,7 @@ namespace EternalFortress.Data.Folders
         {
             var folders = Context
                 .Folder
+                .Include(f => f.Files)
                 .Where(f => f.UserId == userId);
 
             return _mapper.Map<IEnumerable<FolderDTO>>(folders);
@@ -52,7 +54,18 @@ namespace EternalFortress.Data.Folders
                 .FirstOrDefault(f => f.Id == folderId)
                 ?.Name;
 
-            return name;
+            return name!;
+        }
+
+        public string GetFolderNameByFileId(int fileId)
+        {
+            var name = Context
+                .Folder
+                .Include(f => f.Files)
+                .FirstOrDefault(f => f.Files!.Any(files => files.Id == fileId))
+                ?.Name;
+
+            return name!;
         }
     }
 }
