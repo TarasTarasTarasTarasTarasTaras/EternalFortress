@@ -1,4 +1,4 @@
-import { Component, ElementRef, Input, OnInit, ViewChild } from '@angular/core';
+import { Component, ElementRef, Input, OnInit, ViewChild, Output, EventEmitter } from '@angular/core';
 import { saveAs } from "file-saver-es";
 import { Subscription } from 'rxjs';
 import { FileService } from '../../services/file.service';
@@ -9,12 +9,13 @@ import { FileService } from '../../services/file.service';
   styleUrls: ['./file-download.component.css']
 })
 export class FileDownloadComponent implements OnInit {
-  @ViewChild('fileUpload') fileUpload!: ElementRef;;
+  @ViewChild('fileUpload') fileUpload!: ElementRef;
+  @Input() fileId: number;
   @Input() folderId: number;
+  @Output() downloaded = new EventEmitter();
 
   fileName = '';
 
-  fileId: number;
   downloadProgress: number = 0;
 
   fileDownload$: Subscription;
@@ -31,13 +32,15 @@ export class FileDownloadComponent implements OnInit {
     this.isDownloadInProgress = true;
 
     this.downloadProgress = 0;
-    let downloadProgress = (progress: number) => this.downloadProgress += progress * 100;
+    let downloadProgress = (progress: number) => {
+      this.downloadProgress += progress * 100;
+    }
 
     this.fileDownload$ = this.fileService.downloadFile(file.id, file.size, downloadProgress)
       .subscribe({
         next: (blob) => {
           saveAs(blob, file.name);
-
+          this.downloaded.emit();
           // alert
         },
         error: error => {
@@ -46,5 +49,10 @@ export class FileDownloadComponent implements OnInit {
         },
         complete: () => this.isDownloadInProgress = false
       })
+  }
+
+  cancelDownload() {
+    this.isDownloadInProgress = false;
+    if (this.fileDownload$) this.fileDownload$.unsubscribe();
   }
 }

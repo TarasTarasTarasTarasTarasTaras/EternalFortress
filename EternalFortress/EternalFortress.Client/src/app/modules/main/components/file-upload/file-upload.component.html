@@ -1,1 +1,10 @@
 <input type="file" class="file-input" (change)="onFileSelected($event)" #fileUpload>
+
+<div class="file-upload">
+    <div class="fileRow" *ngIf="isUploadInProgress">
+        <div class="row-inner">
+            <span>{{fileName.length < 12 ? fileName : fileName.substring(0, 12) + '...'}}</span>
+            <mat-progress-bar class="progress-bar" mode="determinate" [value]="uploadProgress"></mat-progress-bar>
+        </div>
+    </div>
+</div>

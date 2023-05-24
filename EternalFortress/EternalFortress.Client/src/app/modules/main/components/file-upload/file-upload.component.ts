@@ -19,6 +19,8 @@ export class FileUploadComponent implements OnInit {
   fileId: number;
   fileUpload$: Subscription;
 
+  uploadButton;
+
   constructor(
     public dialog: MatDialog,
     private fileService: FileService) {
@@ -35,6 +37,8 @@ export class FileUploadComponent implements OnInit {
     const file: File = event.target.files[0];
     this.fileUpload.nativeElement.value = null;
 
+    this.uploadButton = document.getElementById('uploadBtn' + this.folderId);
+
     if (file) {
       this.fileName = file.name;
 
@@ -43,6 +47,8 @@ export class FileUploadComponent implements OnInit {
   }
 
   async uploadFile(file: File) {
+    this.uploadButton.disabled = true;
+
     this.saveFileInfo(file).subscribe({
       next: async (fileId) => {
         this.fileId = fileId;
@@ -58,7 +64,7 @@ export class FileUploadComponent implements OnInit {
               // show alert
             },
           complete: () => {
-
+            this.uploadButton.disabled = false;
           }
         })
       },
@@ -79,6 +85,6 @@ export class FileUploadComponent implements OnInit {
   }
 
   get isUploadInProgress() {
-    return false;
+    return this.uploadButton?.disabled ?? false;
   }
 }

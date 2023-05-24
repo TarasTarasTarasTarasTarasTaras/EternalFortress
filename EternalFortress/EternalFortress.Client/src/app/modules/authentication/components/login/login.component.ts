@@ -4,6 +4,7 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { environment } from 'src/environments/environment';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-login',
@@ -16,7 +17,7 @@ export class LoginComponent implements OnInit {
     password: new FormControl('', Validators.required),
   });
 
-  constructor(private http: HttpClient, private router: Router, private snackBar: MatSnackBar) { }
+  constructor(private http: HttpClient, private router: Router, private snackBar: MatSnackBar, private toastr: ToastrService) { }
 
   ngOnInit() {
   }
@@ -32,6 +33,7 @@ export class LoginComponent implements OnInit {
       next: (res: any) => {
         this.setLocalStorage(res.token);
         this.router.navigate(['dashboard']);
+        this.toastr.success('Ви успішно авторизувались', 'Успіх');
       },
       error: () => {
         this.snackBar.open('Невірний Email/Пароль', 'Закрити', {

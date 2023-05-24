@@ -95,7 +95,7 @@ h2 {
 .content {
     margin-top: 40px;
     overflow-y: auto;
-    max-height: 400px;
+    max-height: 370px;
     padding-top: 10px;
 }
 
@@ -174,4 +174,18 @@ h2 {
 
 .btn-delete:hover {
     background-color: #b75858;
+}
+
+.file-download {
+    position: absolute;
+    top: -24px;
+    right: 740px;
+}
+
+.btn-upload {
+    margin-top: -40px;
+}
+
+.btn-upload:disabled {
+    background-color: #838383a3;
 }

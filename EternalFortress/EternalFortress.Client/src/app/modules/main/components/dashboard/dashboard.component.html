@@ -39,23 +39,23 @@
       <div class="content">
         <div class="file" *ngFor="let file of selectedFiles">
           <div style="width: 5%;"><img class="img-file" src="../../../../../assets/img/file.png"></div>
-          <div style="width: 40%;">{{ file.name }}</div>
+          <div style="width: 40%;"><p class="file-name">{{file.name.length < 20 ? file.name : file.name.substring(0, 20) + '...'}}</p></div>
+
+          <app-file-download class="file-download" #fileDownload (downloaded)="fileDownloaded()" [fileId]="file.id" [folderId]="selectedFolder" [file]="file"></app-file-download>
 
           <div style="width: 20%;">{{ file.uploadDate | date:'yyyy-MM-dd HH:mm:ss' }}</div>
           <div style="width: 15%;">{{ kbToMb(file.size) }}MB</div>
           <button class="btn btn-download" (click)="onFileDownloadClick(file)">Скачати</button>
           <button class="btn btn-delete">Видалити</button>
-
-          <app-file-download #fileDownload [folderId]="selectedFolder" [file]="file"></app-file-download>
         </div>
       </div>
     </div>
 
-    <button class="btn" *ngIf="selectedFolder && folders.length" (click)="onFileUploadClick()">
+    <button id="uploadBtn{{selectedFolder}}" class="btn btn-upload" *ngIf="selectedFolder && folders.length" (click)="onFileUploadClick()">
       Завантажити
     </button>
 
-    <app-file-upload #fileUpload (uploaded)="getFolders()" [folderId]="selectedFolder"></app-file-upload>
+    <app-file-upload #fileUpload (uploaded)="fileUploaded()" [folderId]="selectedFolder"></app-file-upload>
   </div>
 </div>
 

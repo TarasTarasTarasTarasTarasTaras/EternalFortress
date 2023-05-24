@@ -1,0 +1,7 @@
+<div class="fileRow" *ngIf="isDownloadInProgress">
+    <div class="row-inner">
+        <mat-progress-bar class="progress-bar" mode="determinate" [value]="downloadProgress"></mat-progress-bar>
+        <a><mat-icon class="cancel-upload" (click)="cancelDownload()">delete_forever</mat-icon></a>
+    </div>
+    <div style="display: inline;"></div>
+</div>

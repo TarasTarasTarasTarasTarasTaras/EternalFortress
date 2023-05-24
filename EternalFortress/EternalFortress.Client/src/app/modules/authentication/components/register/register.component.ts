@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { AbstractControl, FormControl, FormGroup, ValidationErrors, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
 import { Observable, of, switchMap } from 'rxjs';
 import { environment } from 'src/environments/environment';
 
@@ -21,7 +22,7 @@ export class RegisterComponent implements OnInit {
 
   countries: any;
 
-  constructor(private http: HttpClient, private router: Router) { }
+  constructor(private http: HttpClient, private router: Router, private toastr: ToastrService) { }
 
   ngOnInit() {
     this.getCountries();
@@ -37,6 +38,7 @@ export class RegisterComponent implements OnInit {
     this.http.post(environment.apiUrl + 'account/register', model).subscribe(() => {
       this.http.post(environment.apiUrl + 'account/login', model).subscribe((res: any) => {
         this.setLocalStorage(res.token);
+        this.toastr.success('Ви успішно зареєструвались', 'Успіх');
         this.router.navigate(['dashboard']);
       })
     })

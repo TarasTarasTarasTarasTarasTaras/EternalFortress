@@ -1,5 +1,5 @@
 import { HttpClient } from '@angular/common/http';
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild, QueryList, ViewChildren } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { PopupWithInputComponent } from '../popup-with-input/popup-with-input.component';
@@ -7,6 +7,7 @@ import { environment } from 'src/environments/environment';
 import { Router } from '@angular/router';
 import { FileUploadComponent } from '../file-upload/file-upload.component';
 import { FileDownloadComponent } from '../file-download/file-download.component';
+import { IndividualConfig, ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-dashboard',
@@ -20,12 +21,14 @@ export class DashboardComponent implements OnInit {
 
   @ViewChild('fileUpload') fileUploadComponent: FileUploadComponent;
   @ViewChild('fileDownload') fileDownloadComponent: FileDownloadComponent;
+  @ViewChildren('fileDownload') fileDownloadComponents: QueryList<FileDownloadComponent>;
 
   constructor(
     private router: Router,
     public dialog: MatDialog,
     private snackBar: MatSnackBar,
-    private http: HttpClient) { }
+    private http: HttpClient,
+    private toastr: ToastrService) { }
 
   ngOnInit() {
     this.getFolders();
@@ -82,11 +85,25 @@ export class DashboardComponent implements OnInit {
   }
 
   onFileDownloadClick(file) {
-    if (this.fileDownloadComponent)
-      this.fileDownloadComponent.download(file)
+    if (this.fileDownloadComponents)
+      this.fileDownloadComponents.find(f => f.fileId == file.id).download(file);
   }
 
   kbToMb(kb: number): string {
     return (kb / 1000000).toFixed(2);
   };  
+
+  fileDownloaded() {
+    this.snackBar.open('Файл скачано успішно', 'Закрити', {
+      duration: 5000,
+    });
+  }
+
+  fileUploaded() {
+    this.snackBar.open('Файл завантажено успішно', 'Закрити', {
+      duration: 5000,
+    });
+
+    this.getFolders();
+  }
 }

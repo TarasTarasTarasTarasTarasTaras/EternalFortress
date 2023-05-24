@@ -10,7 +10,7 @@ const baseUrl = `${environment.apiUrl}dashboard`;
 })
 
 export class FileService {
-  private chunkSize = 1000000;
+  private chunkSize = 100000;
 
   constructor(
     private http: HttpClient) { }
