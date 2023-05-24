@@ -41,10 +41,8 @@ export class FileDownloadComponent implements OnInit {
         next: (blob) => {
           saveAs(blob, file.name);
           this.downloaded.emit();
-          // alert
         },
-        error: error => {
-          // alert
+        error: () => {
           this.isDownloadInProgress = false;
         },
         complete: () => this.isDownloadInProgress = false

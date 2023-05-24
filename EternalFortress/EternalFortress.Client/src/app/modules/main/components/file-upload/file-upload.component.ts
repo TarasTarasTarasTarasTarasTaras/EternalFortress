@@ -60,16 +60,10 @@ export class FileUploadComponent implements OnInit {
           next: () => {  
             this.uploaded.emit();
           },
-          error: () => {
-              // show alert
-            },
           complete: () => {
             this.uploadButton.disabled = false;
           }
         })
-      },
-      error: () => {
-        // show alert
       }
     })
   }

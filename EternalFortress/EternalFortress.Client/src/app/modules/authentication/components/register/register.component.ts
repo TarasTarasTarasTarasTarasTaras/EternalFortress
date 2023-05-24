@@ -1,9 +1,10 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { AbstractControl, FormControl, FormGroup, ValidationErrors, Validators } from '@angular/forms';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
-import { ToastrService } from 'ngx-toastr';
 import { Observable, of, switchMap } from 'rxjs';
+import { AppComponent } from 'src/app/app.component';
 import { environment } from 'src/environments/environment';
 
 @Component({
@@ -22,7 +23,7 @@ export class RegisterComponent implements OnInit {
 
   countries: any;
 
-  constructor(private http: HttpClient, private router: Router, private toastr: ToastrService) { }
+  constructor(private http: HttpClient, private router: Router, private snackBar: MatSnackBar, private appComponent: AppComponent) { }
 
   ngOnInit() {
     this.getCountries();
@@ -38,7 +39,12 @@ export class RegisterComponent implements OnInit {
     this.http.post(environment.apiUrl + 'account/register', model).subscribe(() => {
       this.http.post(environment.apiUrl + 'account/login', model).subscribe((res: any) => {
         this.setLocalStorage(res.token);
-        this.toastr.success('Ви успішно зареєструвались', 'Успіх');
+        this.updateUserId();
+
+        this.snackBar.open('Ви успішно зареєструвались', 'Закрити', {
+          duration: 5000,
+        });
+
         this.router.navigate(['dashboard']);
       })
     })
@@ -71,5 +77,13 @@ export class RegisterComponent implements OnInit {
 
     localStorage.setItem('access_token', token);
     localStorage.setItem('login-event', 'login' + Math.random());
+  }
+
+  private updateUserId() {
+    this.http.get(environment.apiUrl + 'account/user-id').subscribe({
+      next: (res: any) => {
+        this.appComponent.userId = res?.userId;
+      }
+    })
   }
 }

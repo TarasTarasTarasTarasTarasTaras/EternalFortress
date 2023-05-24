@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using EternalFortress.API.Extensions;
 using EternalFortress.API.Models;
 using EternalFortress.Business.Accounts;
 using EternalFortress.Entities.DTOs;
@@ -51,6 +52,12 @@ namespace EternalFortress.API.Controllers
         {
             var countries = _accountFacade.GetCountries();
             return Ok(countries);
+        }
+
+        [HttpGet("user-id")]
+        public ActionResult GetUserId()
+        {
+            return Ok(new { userId = User.GetId() });
         }
     }
 }

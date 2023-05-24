@@ -1,20 +1,19 @@
-.nav {
-    display: flex;
-    width: 70%;
-    justify-content: space-around;
-    margin-left: 100px;
-}
-
 .nav-item {
-    width: 150px;
     color: black;
     font-size: 26px;
     margin-top: 20px;
     cursor: pointer;
-    display: flex;
-    width: 290px;
+    display: inline;
+    margin-right: 40px;
 }
 
-.nav-item-inner {
-    margin-right: 30px;
+.nav {
+    width: 100%;
+    padding-top: 20px;
+    margin-left: 70px;
+}
+
+.right {
+    float: right;
+    margin-right: 55px;
 }

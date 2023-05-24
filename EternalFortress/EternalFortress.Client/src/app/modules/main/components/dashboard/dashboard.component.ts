@@ -7,7 +7,6 @@ import { environment } from 'src/environments/environment';
 import { Router } from '@angular/router';
 import { FileUploadComponent } from '../file-upload/file-upload.component';
 import { FileDownloadComponent } from '../file-download/file-download.component';
-import { IndividualConfig, ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-dashboard',
@@ -27,11 +26,10 @@ export class DashboardComponent implements OnInit {
     private router: Router,
     public dialog: MatDialog,
     private snackBar: MatSnackBar,
-    private http: HttpClient,
-    private toastr: ToastrService) { }
+    private http: HttpClient) { }
 
   ngOnInit() {
-    this.getFolders();
+    this.getUserId();
   }
 
   createFolder() {
@@ -105,5 +103,18 @@ export class DashboardComponent implements OnInit {
     });
 
     this.getFolders();
+  }
+
+  getUserId() {
+    this.http.get(environment.apiUrl + 'account/user-id').subscribe({
+      next: (res: any) => {
+        if (!res?.userId) {
+          this.router.navigate(['account/login']);
+        }
+        else {
+          this.getFolders();
+        }
+      }
+    })
   }
 }

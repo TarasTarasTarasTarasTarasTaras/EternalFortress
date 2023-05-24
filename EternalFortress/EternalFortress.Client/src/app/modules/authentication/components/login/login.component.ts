@@ -4,7 +4,7 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { environment } from 'src/environments/environment';
 import { MatSnackBar } from '@angular/material/snack-bar';
-import { ToastrService } from 'ngx-toastr';
+import { AppComponent } from 'src/app/app.component';
 
 @Component({
   selector: 'app-login',
@@ -17,9 +17,23 @@ export class LoginComponent implements OnInit {
     password: new FormControl('', Validators.required),
   });
 
-  constructor(private http: HttpClient, private router: Router, private snackBar: MatSnackBar, private toastr: ToastrService) { }
+  constructor(private http: HttpClient, private router: Router, private snackBar: MatSnackBar, private appComponent: AppComponent) { }
 
   ngOnInit() {
+    this.getUserId();
+  }
+
+  getUserId() {
+    this.http.get(environment.apiUrl + 'account/user-id').subscribe({
+      next: (res: any) => {
+        if (res?.userId) {
+          this.router.navigate(['dashboard']);
+        }
+        else {
+          this.router.navigate(['account/login']);
+        } 
+      }
+    })
   }
 
   login() {
@@ -32,8 +46,13 @@ export class LoginComponent implements OnInit {
     this.http.post(environment.apiUrl + 'account/login', model).subscribe({
       next: (res: any) => {
         this.setLocalStorage(res.token);
+        this.updateUserId();
+        
         this.router.navigate(['dashboard']);
-        this.toastr.success('Ви успішно авторизувались', 'Успіх');
+
+        this.snackBar.open('Ви успішно авторизувались', 'Закрити', {
+          duration: 5000,
+        });
       },
       error: () => {
         this.snackBar.open('Невірний Email/Пароль', 'Закрити', {
@@ -52,5 +71,13 @@ export class LoginComponent implements OnInit {
     
     localStorage.setItem('access_token', token);
     localStorage.setItem('login-event', 'login' + Math.random());
+  }
+
+  private updateUserId() {
+    this.http.get(environment.apiUrl + 'account/user-id').subscribe({
+      next: (res: any) => {
+        this.appComponent.userId = res?.userId;
+      }
+    })
   }
 }
