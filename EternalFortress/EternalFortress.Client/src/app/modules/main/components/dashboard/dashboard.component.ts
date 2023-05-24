@@ -7,6 +7,7 @@ import { environment } from 'src/environments/environment';
 import { Router } from '@angular/router';
 import { FileUploadComponent } from '../file-upload/file-upload.component';
 import { FileDownloadComponent } from '../file-download/file-download.component';
+import { ConfirmationDialogComponent } from '../confirmation-dialog/confirmation-dialog.component';
 
 @Component({
   selector: 'app-dashboard',
@@ -85,6 +86,28 @@ export class DashboardComponent implements OnInit {
   onFileDownloadClick(file) {
     if (this.fileDownloadComponents)
       this.fileDownloadComponents.find(f => f.fileId == file.id).download(file);
+  }
+
+  deleteFile(fileId: number) {
+    this.dialog.open(ConfirmationDialogComponent, {
+      data: {
+        title: 'Видалення файлу',
+        message: 'Ви впевнені, що хочете видалити цей файл? Відновлення файлу стане неможливим.'
+      },
+      panelClass: 'bg-color',
+      disableClose: true
+    }).afterClosed()
+    .subscribe(res => {
+      if (res?.isConfirmed) {
+        this.http.post(environment.apiUrl + `dashboard/delete-file/${fileId}`, {}).subscribe(() => {
+          this.getFolders();
+          
+          this.snackBar.open('Файл видалено успішно', 'Закрити', {
+            duration: 5000,
+          });
+        })
+      }
+    })
   }
 
   kbToMb(kb: number): string {

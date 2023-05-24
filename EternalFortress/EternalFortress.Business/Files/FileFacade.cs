@@ -112,5 +112,47 @@ namespace EternalFortress.Business.Files
                 return memoryStream.ToArray();
             }
         }
+
+        public async Task DeleteFile(int fileId, int userId)
+        {
+            await DeleteFileFromS3(fileId, userId);
+            _fileRepository.DeleteFile(fileId, userId);
+        }
+
+        private async Task DeleteFileFromS3(int fileId, int userId)
+        {
+            var folderName = _folderFacade.GetFolderNameByFileId(fileId);
+            var path = $"{userId}/{folderName}/{fileId}/";
+            var bucketName = _configuration["AWSBucketName"];
+
+            var listRequest = new ListObjectsV2Request
+            {
+                BucketName = bucketName,
+                Prefix = path
+            };
+
+            var response = _s3Client.ListObjectsV2Async(listRequest).Result;
+
+            // Видаляємо кожен об'єкт (файл) в папці
+            foreach (var s3Object in response.S3Objects)
+            {
+                var deleteRequest = new DeleteObjectRequest
+                {
+                    BucketName = bucketName,
+                    Key = s3Object.Key
+                };
+
+                _s3Client.DeleteObjectAsync(deleteRequest).Wait();
+            }
+
+            // Видаляємо саму папку (prefix)
+            var deleteFolderRequest = new DeleteObjectRequest
+            {
+                BucketName = bucketName,
+                Key = path
+            };
+
+            _s3Client.DeleteObjectAsync(deleteFolderRequest).Wait();
+        }
     }
 }

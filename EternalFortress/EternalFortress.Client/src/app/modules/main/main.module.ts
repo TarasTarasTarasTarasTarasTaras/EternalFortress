@@ -7,6 +7,7 @@ import { PopupWithInputComponent } from './components/popup-with-input/popup-wit
 import { AboutComponent } from './components/about/about.component';
 import { FileUploadComponent } from './components/file-upload/file-upload.component';
 import { FileDownloadComponent } from './components/file-download/file-download.component';
+import { ConfirmationDialogComponent } from './components/confirmation-dialog/confirmation-dialog.component';
 
 @NgModule({
   imports: [
@@ -19,7 +20,8 @@ import { FileDownloadComponent } from './components/file-download/file-download.
     PopupWithInputComponent,
     AboutComponent,
     FileUploadComponent,
-    FileDownloadComponent
+    FileDownloadComponent,
+    ConfirmationDialogComponent
   ],
   schemas: [ 
     CUSTOM_ELEMENTS_SCHEMA

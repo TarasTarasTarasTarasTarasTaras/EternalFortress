@@ -6,5 +6,6 @@ namespace EternalFortress.Data.Files
     {
         IEnumerable<FileInfoDTO> GetUserFiles(int userId, int folderId);
         int SaveFileInfo(FileInfoDTO file);
+        void DeleteFile(int fileId, int userId);
     }
 }

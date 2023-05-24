@@ -1,0 +1,14 @@
+<div class="main-block">
+  <h1 class="name-block" mat-dialog-title>{{data.title}}</h1>
+
+  <div class="description-block" mat-dialog-content>
+    {{data.message}}
+  </div>
+
+  <div class="block-input-row">
+    <div class="block-buttons">
+      <button *ngIf="!data.hideNoButton" class="button" (click)="noPressed()">Скасувати</button>
+      <button class="button" (click)="okPressed()">Так</button>
+    </div>
+  </div>
+</div>

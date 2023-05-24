@@ -33,5 +33,15 @@ namespace EternalFortress.Data.Files
 
             return entity.Id;
         }
+
+        public void DeleteFile(int fileId, int userId)
+        {
+            var entity = Context
+                .FileInfo
+                .First(f => f.Id == fileId && f.UserId == userId);
+
+            Context.FileInfo.Remove(entity);
+            Context.SaveChanges();
+        }
     }
 }

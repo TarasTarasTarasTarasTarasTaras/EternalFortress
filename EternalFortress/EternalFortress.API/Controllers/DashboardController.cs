@@ -64,5 +64,12 @@ namespace EternalFortress.API.Controllers
             var content = await _fileFacade.DownloadChunkFromS3(User.GetId(), fileId, index);
             return Ok(new { Chunk = content });
         }
+
+        [HttpPost("delete-file/{fileId}")]
+        public async Task<ActionResult> DeleteFile(int fileId)
+        {
+            await _fileFacade.DeleteFile(fileId, User.GetId());
+            return Ok();
+        }
     }
 }
